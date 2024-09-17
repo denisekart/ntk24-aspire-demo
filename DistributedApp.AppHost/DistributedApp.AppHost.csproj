@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsAspireHost>true</IsAspireHost>
+        <UserSecretsId>f17dab9e-746b-4bc8-b4f6-3c46f9e2f23f</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.0" />
+        <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.0" />
+        <PackageReference Include="Aspire.Hosting.SqlServer" Version="8.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DistributedApp.Api\DistributedApp.Api.csproj" />
+      <ProjectReference Include="..\DistributedApp.Web\DistributedApp.Web.Client\DistributedApp.Web.Client.csproj" />
+      <ProjectReference Include="..\DistributedApp.Web\DistributedApp.Web\DistributedApp.Web.csproj" />
+    </ItemGroup>
+
+</Project>
