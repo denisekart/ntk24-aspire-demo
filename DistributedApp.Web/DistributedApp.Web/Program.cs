@@ -1,4 +1,5 @@
 using DistributedApp.Web;
+using DistributedApp.Web.Client;
 using DistributedApp.Web.Client.Pages;
 using DistributedApp.Web.Components;
 
@@ -10,6 +11,16 @@ builder.ConfigureApplication();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+builder.Services.AddScoped<WeatherService>();
+builder.Services.AddScoped<GetWeatherForecastsDelegate>(services => async () =>
+    (await services.GetRequiredService<WeatherService>()
+        .GetWeatherForecasts())
+    .Select(w => new DistributedApp.Web.Client.WeatherForecast()
+    {
+        Date = w.Date,
+        Summary = w.Summary,
+        TemperatureC = w.TemperatureC,
+    }).ToArray());
 
 var app = builder.Build();
 

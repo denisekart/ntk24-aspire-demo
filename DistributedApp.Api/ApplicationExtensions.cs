@@ -13,11 +13,17 @@ public static class ApplicationExtensions
         
         return builder;
     }
+    
+    public static IApplicationBuilder FailRandomly(this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<RandomlyFailingMiddleware>();
+    }
 
     static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
+    
 
     public static IEndpointRouteBuilder MapApi(this IEndpointRouteBuilder endpoints)
     {
@@ -59,5 +65,18 @@ public static class ApplicationExtensions
             .WithOpenApi();
 
         return endpoints;
+    }
+}
+
+public class RandomlyFailingMiddleware : IMiddleware
+{
+    public Task InvokeAsync(HttpContext context, RequestDelegate next)
+    {
+        if(Random.Shared.NextDouble() > .5)
+        {
+            throw new ApplicationException("I don't feel like it right now.");
+        }
+        
+        return next(context);
     }
 }
