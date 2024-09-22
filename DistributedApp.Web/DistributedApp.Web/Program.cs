@@ -25,6 +25,7 @@ builder.Services.AddScoped<GetWeatherForecastsDelegate>(services => async () =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.MapDefaultEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
