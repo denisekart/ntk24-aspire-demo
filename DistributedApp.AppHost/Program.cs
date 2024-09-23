@@ -8,7 +8,6 @@ var database = builder
 
 var api = builder.AddProject<Projects.DistributedApp_Api>("api")
     .WithReference(database)
-    .WithExternalHttpEndpoints()
     .WithReplicas(2);
 
 var web = builder.AddProject<Projects.DistributedApp_Web>("web")

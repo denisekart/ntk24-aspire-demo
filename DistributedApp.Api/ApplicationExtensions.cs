@@ -72,7 +72,7 @@ public class RandomlyFailingMiddleware : IMiddleware
 {
     public Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-        if(Random.Shared.NextDouble() > .5)
+        if(Random.Shared.NextDouble() > .6)
         {
             throw new ApplicationException("I don't feel like it right now.");
         }
